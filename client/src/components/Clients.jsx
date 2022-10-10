@@ -1,19 +1,11 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { GET_CLIENTS } from '../queries/clientQueries';
 import ClientRow from './ClientRow';
+import Loading from './Loading';
 
-const GET_CLIENTS = gql`
-  {
-    clients {
-      id
-      name
-      email
-      phone
-    }
-  }
-`;
 const Clients = () => {
   const { data, loading, error } = useQuery(GET_CLIENTS);
-  if (loading) return 'Loading...';
+  if (loading) return <Loading />;
   if (error) return `Error! ${error.message}`;
 
   return (
